@@ -29,7 +29,17 @@ class Courses(models.Model):
     price = models.DecimalField( max_digits=5, decimal_places=2)
     rate = models.IntegerField(validators=[MaxValueValidator(5) , MinValueValidator(1)])
     slug = models.SlugField(null=True , blank=True)
-    
+    active = models.BooleanField()
+
+    def statue(self):
+        if self.active == False:
+            return "its not avilabel"
+        elif self.active == True:
+            return "avilabel"    
+        return True    
+
+
+
     def __str__(self):
         return self.nameofcours
 
