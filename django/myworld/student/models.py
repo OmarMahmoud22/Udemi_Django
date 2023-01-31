@@ -42,7 +42,7 @@ class Teacher(models.Model):
     fname = models.CharField( max_length=50)
     lname = models.CharField( max_length=50)
     age = models.PositiveIntegerField()
-    his_course = models.OneToOneField(Courses, on_delete=models.CASCADE)
+    his_course = models.ForeignKey(Courses, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.fname

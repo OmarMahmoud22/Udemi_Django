@@ -4,11 +4,14 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('Teacher' , views.viewsets_techer)
-
+router.register('Student' , views.viewsets_Student)
+router.register('courses' , views.viewsets_courses)
+router.register('categuty' , views.viewsets_Categury)
 
 
 urlpatterns = [
-    path('resttecher/viewsets/' ,include(router.urls) ),
-    path('teacher/mixens/ ', views.MixsinsTracher.as_view() )
+    path('rest/viewsets/' ,include(router.urls) ),
+    path('teacher/mixens/ ', views.MixsinsTracher.as_view() ),
+
     
 ]
