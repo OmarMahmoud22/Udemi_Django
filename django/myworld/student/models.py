@@ -2,19 +2,27 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
 from django.template.defaultfilters import slugify  
+from django.conf.global_settings import LANGUAGES
 
 # Create your models here.
 
 class StudintInfo(models.Model):
     user = models.OneToOneField(User , on_delete=models.PROTECT)
     age = models.PositiveIntegerField()
-    his_course = models.ForeignKey("Courses", on_delete=models.CASCADE)
+    his_course = models.ManyToManyField("Courses")
 
-    
+
+    def how_muchethis_course_have_this_student(self)     :
+        return  self.his_course.count()
 
     def __str__(self):
         return str(self.user)
 
+    #def what_is_hiscourse(self):
+        
+
+#>>> new_list = [obj1, obj2, obj3]
+#>>> e.related_set.set(new_list)
 
 class CateguryOfCourse(models.Model):
     name = models.CharField( max_length=50)
@@ -30,6 +38,9 @@ class Courses(models.Model):
     rate = models.IntegerField(validators=[MaxValueValidator(5) , MinValueValidator(1)])
     slug = models.SlugField(null=True , blank=True)
     active = models.BooleanField()
+    language = models.CharField(max_length=7, choices=LANGUAGES)
+    #date = models.DateTimeField()
+    
 
     def statue(self):
         if self.active == False:
@@ -37,6 +48,9 @@ class Courses(models.Model):
         elif self.active == True:
             return "avilabel"    
         return True    
+
+
+
 
 
 
@@ -56,6 +70,12 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.fname
+
+
+
+ 
+
+
 
 
 

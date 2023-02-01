@@ -18,12 +18,12 @@ class CatSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
      model = StudintInfo
-     fields = '__all__'
+     fields = ('id' , 'how_muchethis_course_have_this_student' , 'user' , 'age' , 'what_is_hiscourse')
 
 class CoursSerializer(serializers.ModelSerializer):
     class Meta:
      model = Courses
-     fields = ( 'id' , 'statue')
+     fields = ( 'id' , 'statue' , 'nameofcours' ,'cat' , 'price' , 'rate' , 'slug', 'active' , 'language' )
 
 
     
