@@ -18,12 +18,11 @@ class StudintInfo(models.Model):
     def __str__(self):
         return str(self.user)
 
-    #def what_is_hiscourse(self):
+
+    def what(self):
+        student_courses = StudintInfo.objects.prefetch_related('his_course').all()
+        return student_courses
         
-
-#>>> new_list = [obj1, obj2, obj3]
-#>>> e.related_set.set(new_list)
-
 class CateguryOfCourse(models.Model):
     name = models.CharField( max_length=50)
 
@@ -48,11 +47,6 @@ class Courses(models.Model):
         elif self.active == True:
             return "avilabel"    
         return True    
-
-
-
-
-
 
     def __str__(self):
         return self.nameofcours

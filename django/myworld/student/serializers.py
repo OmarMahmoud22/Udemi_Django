@@ -18,7 +18,7 @@ class CatSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
      model = StudintInfo
-     fields = ('id' , 'how_muchethis_course_have_this_student' , 'user' , 'age' , 'what_is_hiscourse')
+     fields = ('id' , 'how_muchethis_course_have_this_student' , 'user' , 'age' , 'what' )
 
 class CoursSerializer(serializers.ModelSerializer):
     class Meta:
