@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework import viewsets , mixins , generics
-
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 
 class viewsets_techer(viewsets.ModelViewSet):
@@ -21,7 +23,11 @@ class MixsinsTracher(mixins.ListModelMixin , mixins.CreateModelMixin , generics.
 
 class viewsets_Student(viewsets.ModelViewSet):
     queryset = StudintInfo.objects.all()
-    serializer_class = StudentSerializer
+    serializer_class = StudentSerializerInfo
+
+
+    
+
 
 class viewsets_courses(viewsets.ModelViewSet):
     queryset = Courses.objects.all()

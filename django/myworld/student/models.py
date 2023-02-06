@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
 from django.template.defaultfilters import slugify  
 from django.conf.global_settings import LANGUAGES
+from rest_framework import serializers
 
 # Create your models here.
 
 class StudintInfo(models.Model):
     user = models.OneToOneField(User , on_delete=models.PROTECT)
     age = models.PositiveIntegerField()
-    his_course = models.ManyToManyField("Courses")
+    his_course = models.ManyToManyField("Courses" )
 
 
     def how_muchethis_course_have_this_student(self)     :
@@ -19,13 +20,19 @@ class StudintInfo(models.Model):
         return str(self.user)
 
 
-    def what(self):
-        student_courses = StudintInfo.objects.prefetch_related('his_course').all()
-        return student_courses
+    #def what(self):
+    #    his_course = serializers.StringRelatedField()
+    #    return his_course
+     
+
+    
+      
+
+
+  
         
 class CateguryOfCourse(models.Model):
     name = models.CharField( max_length=50)
-
     
     def __str__(self):
         return self.name
@@ -55,6 +62,14 @@ class Courses(models.Model):
         if not self.slug:
             self.slug = slugify(self.nameofcours)
         return super(Courses ,self).save(*args, **kwargs)    
+
+
+    def what(self):
+     stu = StudintInfo.objects.select_related('his_course').order_by('user')
+     for x in stu:
+        print(x.his_course)
+        return str(x.his_course)
+
 
 class Teacher(models.Model):
     fname = models.CharField( max_length=50)

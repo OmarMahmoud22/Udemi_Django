@@ -15,15 +15,25 @@ class CatSerializer(serializers.ModelSerializer):
      fields = '__all__'
 
 
-class StudentSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-     model = StudintInfo
-     fields = ('id' , 'how_muchethis_course_have_this_student' , 'user' , 'age' , 'what' )
+        model = User
+        fields = "__all__"
+
+
+    
+  
+class StudentSerializerInfo(serializers.ModelSerializer):
+    his_course = serializers.StringRelatedField()
+
+    class Meta:
+        model = StudintInfo
+        fields = ['his_course' , 'user' , 'age']    
 
 class CoursSerializer(serializers.ModelSerializer):
     class Meta:
      model = Courses
-     fields = ( 'id' , 'statue' , 'nameofcours' ,'cat' , 'price' , 'rate' , 'slug', 'active' , 'language' )
+     fields = ( 'id' , 'statue' , 'nameofcours' ,'cat' , 'price' , 'rate' , 'slug', 'active' , 'language', 'what' )
 
 
     
